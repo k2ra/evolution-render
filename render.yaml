@@ -45,7 +45,7 @@ services:
     plan: free # O hobby si es solo para pruebas
     runtime: image
     image: 
-      url: docker.io/redis:6
+      url: docker.io/redislabs/redis
     envVars:
       - key: REDIS_URL
         fromService:
