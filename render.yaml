@@ -38,11 +38,14 @@ services:
         value: "2.3000.1023204200"
     autoDeploy: true
 
-databases:
+
   # Servicio de la base de datos Redis
-  - name: evolution-redis-db
+  - type: web
+    name: evolution-redis-db
     plan: free # O hobby si es solo para pruebas
-    databaseName: redis
-    user: redis
-    #password: panama25 # ¡Cambia esto a una contraseña segura!
-    #autoDeploy: false
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: your-redis-service-name # Must match the name defined for the Redis service
+          property: connectionString
