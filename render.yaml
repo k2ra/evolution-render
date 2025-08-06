@@ -46,9 +46,4 @@ services:
     runtime: image
     image: 
       url: docker.io/redislabs/redis
-    envVars:
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: your-redis-service-name # Must match the name defined for the Redis service
-          property: connectionString
+    
