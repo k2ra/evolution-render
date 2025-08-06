@@ -1,0 +1,47 @@
+# render.yaml
+
+services:
+  # Servicio de la API de Evolution
+  - type: web
+    name: evolution-api
+    plan: free # Se recomienda un plan starter o superior para producción
+    env: docker
+    image: atendai/evolution-api:latest
+    envVars:
+      # Conexión a la base de datos de Render
+      - key: DATABASE_URL
+        fromDatabase:
+          name: n8n-db # Reemplaza con el nombre de tu base de datos de Render
+          property: connectionString
+      - key: REDIS_URL # Ejemplo: si tienes esta variable en tu .env
+        value: "redis://evolution-redis-db:6379"
+      - key: CACHE_REDIS_ENABLED
+        value: "true"
+      - key: CACHE_REDIS_URI
+        value: "redis://redis:6379/0"
+      - key: CACHE_REDIS_PREFIX_KEY
+        value: "evolution"
+      - key: CACHE_LOCAL_ENABLED
+        value: "false"
+      - key: AUTHENTICATION_API_KEY
+        value: "supersecreto"
+      - key: JWT_SECRET
+        value: "superjwtsecret"
+      - key: DEFAULT_CLIENT_EMAIL
+        value: "admin@evolution.local"
+      - key: DEFAULT_CLIENT_PASSWORD
+        value: "admin123"
+      - key: DEFAULT_CLIENT_NAME
+        value: "admin"
+      - key: CONFIG_SESSION_PHONE_VERSION
+        value: "2.3000.1023204200"
+    autoDeploy: true
+
+  # Servicio de la base de datos Redis
+  - type: pserv
+    name: evolution-redis-db
+    plan: starter # O hobby si es solo para pruebas
+    databaseName: redis
+    user: redis
+    password: panama25 # ¡Cambia esto a una contraseña segura!
+    autoDeploy: false
