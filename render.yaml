@@ -43,6 +43,9 @@ services:
   - type: web
     name: evolution-redis-db
     plan: free # O hobby si es solo para pruebas
+    runtime: image
+    image: 
+      url: docker.io/redis:6
     envVars:
       - key: REDIS_URL
         fromService:
