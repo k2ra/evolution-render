@@ -44,5 +44,5 @@ databases:
     plan: free # O hobby si es solo para pruebas
     databaseName: redis
     user: redis
-    password: panama25 # ¡Cambia esto a una contraseña segura!
-    autoDeploy: false
+    #password: panama25 # ¡Cambia esto a una contraseña segura!
+    #autoDeploy: false
