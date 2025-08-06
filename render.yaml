@@ -5,8 +5,9 @@ services:
   - type: web
     name: evolution-api
     plan: free # Se recomienda un plan starter o superior para producción
-    env: docker
-    image: atendai/evolution-api:latest
+    runtime: image
+    image: 
+      url: docker.io/atendai/evolution-api:latest
     envVars:
       # Conexión a la base de datos de Render
       - key: DATABASE_URL
@@ -37,10 +38,10 @@ services:
         value: "2.3000.1023204200"
     autoDeploy: true
 
+databases:
   # Servicio de la base de datos Redis
-  - type: pserv
-    name: evolution-redis-db
-    plan: starter # O hobby si es solo para pruebas
+  - name: evolution-redis-db
+    plan: free # O hobby si es solo para pruebas
     databaseName: redis
     user: redis
     password: panama25 # ¡Cambia esto a una contraseña segura!
